@@ -1,5 +1,6 @@
 define(function(require, exports, module) {
     require('./rater.css');
+    var image = require.resolve('./star.gif');
     jQuery.fn.rater = function(options) {
         return this.each(function() {
 
@@ -15,7 +16,7 @@ define(function(require, exports, module) {
                 after_click: null,
                 before_ajax: null,
                 after_ajax: null,
-                image: 'star.gif',
+                image: image,
                 width: 25,
                 height: 25
             };

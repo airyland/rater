@@ -1,5 +1,6 @@
-define("seedit/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require, exports, module) {
+define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require, exports, module) {
     require("./rater-debug.css");
+    var image = require.resolve("./star.gif");
     jQuery.fn.rater = function(options) {
         return this.each(function() {
             // 默认参数
@@ -14,7 +15,7 @@ define("seedit/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(requi
                 after_click: null,
                 before_ajax: null,
                 after_ajax: null,
-                image: "star.gif",
+                image: image,
                 width: 25,
                 height: 25
             };
@@ -103,6 +104,6 @@ define("seedit/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(requi
     module.exports = jQuery;
 });
 
-define("seedit/rater/1.0.0/rater-debug.css", [], function() {
+define("moe/rater/1.0.0/rater-debug.css", [], function() {
     seajs.importStyle(".rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}");
 });
