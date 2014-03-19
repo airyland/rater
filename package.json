@@ -18,7 +18,7 @@
   "keywords": [],
   "licenses": "MIT",
   "spm": {
-    "output": ["rater.js","rater.css","star.gif"],
+    "output": ["rater.js","rater.css","star.gif","star.png"],
     "alias": {},
     "devAlias": {},
     "engines": {}

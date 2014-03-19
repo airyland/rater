@@ -1,6 +1,6 @@
 define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require, exports, module) {
     require("./rater-debug.css");
-    var image = require.resolve("./star.gif#");
+    var image = require.resolve("./star.png#");
     jQuery.fn.rater = function(options) {
         return this.each(function() {
             // 默认参数
