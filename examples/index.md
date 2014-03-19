@@ -12,8 +12,7 @@ seajs.use('rater', function($){
     var options = {
     after_click : function(ret) {
         $('#demo5 + input').val(ret.number);
-    },
-    image:'http://localhost:8000/src/star.gif'
+    }
 }
 $('#demo5').rater(options);
 });
