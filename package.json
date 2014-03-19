@@ -1,0 +1,26 @@
+{
+  "family": "seedit",
+  "name": "rater",
+  "version": "1.0.0",
+  "description": "jQuery rater plugin",
+  "homepage": "https://github.com/lizheng/rater",
+  "author": "airyland",
+  "maintainers": [
+    "airyland"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lizheng/rater.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": ["rater.js"],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
