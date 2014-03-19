@@ -88,7 +88,7 @@ define(function(require, exports, module) {
 
                 // 处理回调事件
                 if (typeof settings.after_click == 'function') {
-                    settings.after_click(data);
+                    settings.after_click(data,jQuery(this));
                 }
 
                 // 处理ajax调用
