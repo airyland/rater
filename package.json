@@ -3,14 +3,14 @@
   "name": "rater",
   "version": "1.0.0",
   "description": "jQuery rater plugin",
-  "homepage": "https://github.com/lizheng/rater",
+  "homepage": "https://github.com/airyland/rater",
   "author": "airyland",
   "maintainers": [
     "airyland"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/lizheng/rater.git"
+    "url": "git://github.com/airyland/rater.git"
   },
   "bugs": {
     "url": ""
