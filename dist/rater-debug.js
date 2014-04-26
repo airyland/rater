@@ -1,7 +1,17 @@
-define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require, exports, module) {
+define("moe/rater/1.1.0/rater-debug", [ "./rater-debug.css", "$-debug" ], function(require, exports, module) {
     require("./rater-debug.css");
     var image = require.resolve("./star.png#");
-    jQuery.fn.rater = function(options) {
+    var $ = require("$-debug");
+    // Zepto doesnot support prevAll
+    $.fn.prevAll = $.fn.prevAll || function(s) {
+        var $els = $(), $el = this.prev();
+        while ($el.length) {
+            if (typeof s === "undefined" || $el.is(s)) $els = $els.add($el);
+            $el = $el.prev();
+        }
+        return $els;
+    };
+    $.fn.rater = function(options) {
         return this.each(function() {
             // 默认参数
             var settings = {
@@ -21,15 +31,15 @@ define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require,
             };
             // 自定义参数
             if (options) {
-                jQuery.extend(settings, options);
+                $.extend(settings, options);
             }
             // 主容器
-            var content = jQuery('<ul class="rater-star"></ul>');
+            var content = $('<ul class="rater-star"></ul>');
             content.css("background-image", "url(" + settings.image + ")");
             content.css("height", settings.height);
             content.css("width", settings.width * ((settings.max - settings.min) / settings.step + 1));
             // 当前选中的
-            var item = jQuery('<li class="rater-star-item-current"></li>');
+            var item = $('<li class="rater-star-item-current"></li>');
             item.css("background-image", "url(" + settings.image + ")");
             item.css("height", settings.height);
             item.css("width", 0);
@@ -42,7 +52,7 @@ define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require,
             if (settings.enabled) {
                 // 是否能更改
                 for (var value = settings.min; value <= settings.max; value += settings.step) {
-                    item = jQuery('<li class="rater-star-item"></li>');
+                    item = $('<li class="rater-star-item"></li>');
                     item.attr("title", value);
                     item.css("height", settings.height);
                     item.css("width", settings.width * ((value - settings.min) / settings.step + 1));
@@ -53,20 +63,20 @@ define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require,
             }
             if (settings.enabled) {
                 content.mouseover(function() {
-                    jQuery(this).find(".rater-star-item-current").hide();
+                    $(this).find(".rater-star-item-current").hide();
                 }).mouseout(function() {
-                    jQuery(this).find(".rater-star-item-current").show();
+                    $(this).find(".rater-star-item-current").show();
                 });
             }
             // 添加鼠标悬停/点击事件
             content.find(".rater-star-item").mouseover(function() {
-                jQuery(this).attr("class", "rater-star-item-hover");
+                $(this).attr("class", "rater-star-item-hover");
             }).mouseout(function() {
-                jQuery(this).attr("class", "rater-star-item");
+                $(this).attr("class", "rater-star-item");
             }).click(function() {
-                jQuery(this).prevAll(".rater-star-item-current").css("width", jQuery(this).width());
+                $(this).prevAll(".rater-star-item-current").css("width", $(this).width());
                 var star_count = (settings.max - settings.min) / settings.step + 1;
-                var current_number = jQuery(this).width() / settings.width;
+                var current_number = $(this).width() / settings.width;
                 var current_value = settings.min + (current_number - 1) * settings.step;
                 var data = {
                     value: current_value,
@@ -77,11 +87,11 @@ define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require,
                 };
                 // 处理回调事件
                 if (typeof settings.after_click == "function") {
-                    settings.after_click(data, jQuery(this));
+                    settings.after_click(data, $(this));
                 }
                 // 处理ajax调用
                 if (settings.url) {
-                    jQuery.ajax({
+                    $.ajax({
                         data: data,
                         type: settings.method,
                         url: settings.url,
@@ -98,12 +108,12 @@ define("moe/rater/1.0.0/rater-debug", [ "./rater-debug.css" ], function(require,
                     });
                 }
             });
-            jQuery(this).html(content);
+            $(this).html(content);
         });
     };
-    module.exports = jQuery;
+    module.exports = $;
 });
 
-define("moe/rater/1.0.0/rater-debug.css", [], function() {
+define("moe/rater/1.1.0/rater-debug.css", [], function() {
     seajs.importStyle(".rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}");
 });

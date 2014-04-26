@@ -1,12 +1,12 @@
 {
   "family": "moe",
   "name": "rater",
-  "version": "1.0.0",
-  "description": "jQuery rater plugin",
+  "version": "1.1.0",
+  "description": "星星评分实现",
   "homepage": "https://github.com/airyland/rater",
   "author": "airyland",
   "maintainers": [
-    "airyland"
+    "李政 <i@mao.li>"
   ],
   "repository": {
     "type": "git",
