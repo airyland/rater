@@ -1,10 +1,12 @@
 define(function (require, exports, module) {
-    require('./rater.css');
+    var $ = window.jQuery || window.Zepto;
+    var style = '.rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}'
+    $('<style type="text/css">' + style + '</style>').appendTo("head");
     var image = require.resolve('./star.png#');
-    var $ = require('$');
     // Zepto doesnot support prevAll
     $.fn.prevAll = $.fn.prevAll || function (s) {
-        var $els = $(), $el = this.prev()
+        var $els = $(),
+            $el = this.prev();
         while ($el.length) {
             if (typeof s === 'undefined' || $el.is(s)) $els = $els.add($el);
             $el = $el.prev();

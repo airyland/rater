@@ -1,7 +1,8 @@
-define("moe/rater/1.1.0/rater-debug", [ "./rater-debug.css", "$-debug" ], function(require, exports, module) {
-    require("./rater-debug.css");
+define("moe/rater/1.1.0/rater-debug", [], function(require, exports, module) {
+    var $ = window.jQuery || window.Zepto;
+    var style = ".rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}";
+    $('<style type="text/css">' + style + "</style>").appendTo("head");
     var image = require.resolve("./star.png#");
-    var $ = require("$-debug");
     // Zepto doesnot support prevAll
     $.fn.prevAll = $.fn.prevAll || function(s) {
         var $els = $(), $el = this.prev();
@@ -112,8 +113,4 @@ define("moe/rater/1.1.0/rater-debug", [ "./rater-debug.css", "$-debug" ], functi
         });
     };
     module.exports = $;
-});
-
-define("moe/rater/1.1.0/rater-debug.css", [], function() {
-    seajs.importStyle(".rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}");
 });
