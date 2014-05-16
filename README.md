@@ -25,27 +25,27 @@
 
 ## 配置
 
-### target
+### target <em>String</em>
 评分容器选择器
 
 ### enabled <em>Boolean</em>
 是否鼠标经过有响应，默认为`true`
 
 
-### min
+### min <em>Number</em>
 最小值
 
-### max
+### max <em>Number</em>
 最多显示的星星数
 
-### value
+### value <em>Number</em>
 默认显示的星数
 
-### onselect
+### onselect <em>function(number,target)</em>
 选择星星时的回调,`this`指向`target`，参数为当前选择到的值
 
-### onhover
+### onhover <em>function(hoverNumber,target)</em>
 经过星星时的回调,`this`指向`target`，参数为当前经过的星星值(星星值由左到右从1开始)
 
-### onleave
+### onleave <em>function(number,hoverNumber,target)</em>
 离开整个评分区域的回调,`this`指向`target`，参数1为当前选择的星星值，参数2为当前经过到的值
