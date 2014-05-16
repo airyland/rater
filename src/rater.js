@@ -1,128 +1,108 @@
 define(function (require, exports, module) {
     var $ = window.jQuery || window.Zepto;
-    var style = '.rater-star{position:relative;list-style:none;margin:0;padding:0;background-repeat:repeat-x;background-position:left top}.rater-star-item,.rater-star-item-current,.rater-star-item-hover{position:absolute;top:0;left:0;background-repeat:repeat-x}.rater-star-item{background-position:-100% -100%}.rater-star-item-hover{background-position:left bottom;cursor:pointer}.rater-star-item-current{background-position:left center}'
-    $('<style type="text/css">' + style + '</style>').appendTo("head");
-    var image = require.resolve('./star.png#');
-    // Zepto doesnot support prevAll
-    $.fn.prevAll = $.fn.prevAll || function (s) {
-        var $els = $(),
-            $el = this.prev();
-        while ($el.length) {
-            if (typeof s === 'undefined' || $el.is(s)) $els = $els.add($el);
-            $el = $el.prev();
-        }
-        return $els;
-    };
-    $.fn.rater = function (options) {
-        return this.each(function () {
-            // 默认参数
-            var settings = {
-                enabled: true,
-                url: '',
-                method: 'post',
-                min: 1,
-                max: 3,
-                step: 1,
-                value: null,
-                after_click: null,
-                before_ajax: null,
-                after_ajax: null,
-                image: image,
-                width: 25,
-                height: 25
-            };
+    require('./rater.css');
+    var html = '<div class="moekit-star-box"><span class="moekit-star-bg"><em class="moekit-star-front"></em></span></div>';
+    var handler = function (options) {
+        this.each(function () {
+                // default settings
+                var settings = {
+                    enabled: true, // is can be selected
+                    max: 5, // how many starts
+                    value: 3, // current value
+                    width: 22, // rater width
+                    height: 25, // rater height,
+                    onselect: null, // when selected
+                    onhover: null, // when hover
+                    onleave: null // when leave
+                };
 
-            // 自定义参数
-            if (options) {
-                $.extend(settings, options);
-            }
-
-            // 主容器
-            var content = $('<ul class="rater-star"></ul>');
-            content.css('background-image', 'url(' + settings.image + ')');
-            content.css('height', settings.height);
-            content.css('width', settings.width * ((settings.max - settings.min) / settings.step + 1));
-
-            // 当前选中的
-            var item = $('<li class="rater-star-item-current"></li>');
-            item.css('background-image', 'url(' + settings.image + ')');
-            item.css('height', settings.height);
-            item.css('width', 0);
-            item.css('z-index', settings.max / settings.step + 1);
-            if (settings.value) {
-                item.css('width', ((settings.value - settings.min) / settings.step + 1) * settings.width);
-            }
-
-            content.append(item);
-
-            // 星星
-            if (settings.enabled) { // 是否能更改
-                for (var value = settings.min; value <= settings.max; value += settings.step) {
-                    item = $('<li class="rater-star-item"></li>');
-                    item.attr('title', value);
-                    item.css('height', settings.height);
-                    item.css('width', settings.width * ((value - settings.min) / settings.step + 1));
-                    item.css('z-index', (settings.max - value) / settings.step + 1);
-                    item.css('background-image', 'url(' + settings.image + ')');
-                    content.append(item);
+                if (options) {
+                    $.extend(settings, options);
                 }
-            }
 
-            if (settings.enabled) {
-                content.mouseover(function () {
-                    $(this).find('.rater-star-item-current').hide();
-                }).mouseout(function () {
-                        $(this).find('.rater-star-item-current').show();
-                    })
-            }
+                var $this = $(this);
 
-            // 添加鼠标悬停/点击事件
-            content.find('.rater-star-item').mouseover(function () {
-                $(this).attr('class', 'rater-star-item-hover');
-            }).mouseout(function () {
-                    $(this).attr('class', 'rater-star-item');
-                }).click(function () {
-                    $(this).prevAll('.rater-star-item-current').css('width', $(this).width());
-
-                    var star_count = (settings.max - settings.min) / settings.step + 1;
-                    var current_number = $(this).width() / settings.width;
-                    var current_value = settings.min + (current_number - 1) * settings.step;
-                    var data = {
-                        value: current_value,
-                        number: current_number,
-                        count: star_count,
-                        min: settings.min,
-                        max: settings.max
-                    };
-
-                    // 处理回调事件
-                    if (typeof settings.after_click == 'function') {
-                        settings.after_click(data, $(this));
-                    }
-
-                    // 处理ajax调用
-                    if (settings.url) {
-
-                        $.ajax({
-                            data: data,
-                            type: settings.method,
-                            url: settings.url,
-                            beforeSend: function () {
-                                if (typeof settings.before_ajax == 'function') {
-                                    settings.before_ajax(data);
-                                }
-                            },
-                            success: function (ret) {
-                                if (typeof settings.after_ajax == 'function') {
-                                    settings.after_ajax(ret);
-                                }
-                            }
-                        });
-
-                    }
+                // set rater width
+                var $box = $(html).css({
+                    width: settings.width * settings.max
                 });
-            $(this).html(content);
-        });
+                var $start = $box.find('.moekit-star-front').css({
+                    width: settings.width * settings.value
+                });
+
+                // min star
+                if (settings.min) {
+                    $start.css({
+                        width: settings.width * settings.min
+                    });
+                }
+
+
+                $this.html($box);
+
+                if (settings.enabled) {
+                    var render = false;
+                    $box.mousemove(function (e) {
+                        if (!render && settings.value) {
+                            this.number = settings.value;
+                            render = true;
+                        } else {
+                            this.number = this.number || 0;
+                        }
+                        this.hoverNumber = this.hoverNumber || 0;
+                        var parentOffset = $(this).offset();
+                        var relX = e.pageX - parentOffset.left;
+                        var hoverNumber = this.hoverNumber = Math.ceil(relX / 22);
+                        // if min is setting
+                        if (settings.min && hoverNumber < settings.min) {
+                            $box.css({
+                                cursor: 'text'
+                            });
+                        } else {
+                            $box.css({
+                                cursor: 'pointer'
+                            });
+                            $start.css({
+                                width: hoverNumber * 22
+                            });
+                        }
+                        settings.onhover && settings.onhover.call($(this), this.hoverNumber, $this);
+                    }).click(function () {
+                            this.number = this.hoverNumber;
+                            var _this = this;
+                            if (settings.min && _this.number < settings.min) {
+                                _this.number = settings.min;
+                            }
+                            $start.css({
+                                width: _this.number * 22
+                            });
+                            settings.onselect && settings.onselect.call($(this), this.number, $this);
+                        }
+                    ).
+                        mouseleave(function () {
+                            var _this = this;
+
+                            $start.css({
+                                width: _this.number * 22
+                            });
+
+
+                            settings.onleave && settings.onleave.call($(this), this.number, this.hoverNumber, $this);
+                        });
+                }
+                else {
+                    $box.addClass('moekit-star-box-disabled');
+                }
+
+
+            }
+        )
+        ;
+    }
+
+    var rater = function (options) {
+        return handler.call($(options.target), options);
     };
-    module.exports = $;
-});
+    module.exports = rater;
+})
+;

@@ -2,6 +2,9 @@
 
 ---
 
+### 1.1.1
+`CHANGED` 完全重构
+
 ## 1.1.0
 `IMPROVED` 支持`Zepto`
 

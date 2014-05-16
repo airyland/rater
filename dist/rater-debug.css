@@ -1,31 +1,63 @@
-/*! define moe/rater/1.1.0/rater-debug.css */
+/*! define moe/rater/1.1.1/rater-debug.css */
 .rater-star {
-	position: relative;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	background-repeat: repeat-x;
-	background-position: left top;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-repeat: repeat-x;
+    background-position: left top
 }
 
-.rater-star-item,
-.rater-star-item-current,
-.rater-star-item-hover {
-	position: absolute;
-	top: 0;
-	left: 0;
-	background-repeat: repeat-x;
+.rater-star-item, .rater-star-item-current, .rater-star-item-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-repeat: repeat-x
 }
 
 .rater-star-item {
-	background-position: -100% -100%;
+    background-position: -100% -100%
 }
 
 .rater-star-item-hover {
-	background-position: left bottom;
-	cursor:pointer;
+    background-position: left bottom;
+    cursor: pointer
 }
 
-.rater-star-item-current {
-	background-position: left center;
+.moekit-star-box{
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.moekit-star-box-disabled {
+    cursor:text;
+}
+
+.moekit-star-bg,.moekit-star-front {
+    display:block;
+    overflow:hidden;
+    width:100%;
+    height:20px;
+    background:url(moekit-rater.png) repeat-x 0 -33px;
+    float:left;
+}
+.moekit-star-front {
+    float:none;
+    background-position:0 -55px;
+}
+
+.rater-item {
+    background: url(moerater.png) no-repeat;
+}
+
+.rater-normal {
+
+}
+
+.rater-hover {
+
+}
+
+.rater-active {
+
 }
