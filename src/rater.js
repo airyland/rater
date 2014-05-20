@@ -1,5 +1,4 @@
-define(function (require, exports, module) {
-    var $ = window.jQuery || window.Zepto;
+    var $ = window.jQuery || window.Zepto || require('jquery');
     require('./rater.css');
     var html = '<div class="moekit-star-box"><span class="moekit-star-bg"><em class="moekit-star-front"></em></span></div>';
     var handler = function (options) {
@@ -104,5 +103,3 @@ define(function (require, exports, module) {
         return handler.call($(options.target), options);
     };
     module.exports = rater;
-})
-;

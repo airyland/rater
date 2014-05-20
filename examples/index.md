@@ -13,7 +13,7 @@
 
 ````
 ````javascript
-seajs.use('rater', function(rater){
+seajs.use('index', function(rater){
 new rater({
     target:'.moekit-star-1',
     min:1,
@@ -44,7 +44,7 @@ new rater({
 <div class="moekit-star-2"></div>
 ````
 ````javascript
-seajs.use('rater', function(rater){
+seajs.use('index', function(rater){
 new rater({
     target:'.moekit-star-2',
     enabled:false,
@@ -61,7 +61,7 @@ new rater({
 <div class="moekit-star-5"></div>
 ````
 ````javascript
-seajs.use('rater', function(rater){
+seajs.use('index', function(rater){
 new rater({
     target:'.moekit-star-5',
     enabled:true,
@@ -75,7 +75,7 @@ new rater({
 <div class="moekit-star-3"></div>
 ````
 ````javascript
-seajs.use('rater', function(rater){
+seajs.use('index', function(rater){
 new rater({
    target:'.moekit-star-3',
    max:20,
@@ -90,7 +90,7 @@ new rater({
 <div class="moekit-star-4"></div>
 ````
 ````javascript
-seajs.use('rater', function(rater){
+seajs.use('index', function(rater){
 new rater({
     target:'.moekit-star-4',
     min:3,
