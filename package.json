@@ -27,6 +27,7 @@
     "engines": {},
     "dependencies": {
       "seajs": "2.2.1"
+      "jquery": "1.8.3"
     }
   }
 }
