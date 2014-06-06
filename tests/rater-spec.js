@@ -1,8 +1,6 @@
-var rater = require('rater');
-
+var rater = require('index');
 describe('rater', function() {
-
-    it('normal usage', function() {
-
-    });
+  it('normal usage', function() {
+  });
 });
+

@@ -1,5 +1,4 @@
 {
-  "family": "moe",
   "name": "rater",
   "version": "1.1.2",
   "description": "星星评分实现",
@@ -20,15 +19,11 @@
   "spm": {
     "main": "index.js",
     "output": [
-      "rater.js",
-      "rater.css",
-      "star.gif",
-      "star.png",
-      "moekit-rater.png"
+      "src/rater.css",
+      "src/moekit-rater.png"
     ],
     "alias": {},
     "devAlias": {},
-    "engines": {},
     "devDependencies": {
       "seajs": "2.2.1"
     },
