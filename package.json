@@ -1,26 +1,40 @@
 {
-    "family": "moe",
-    "name": "rater",
-    "version": "1.1.1",
-    "description": "星星评分实现",
-    "homepage": "https://github.com/airyland/rater",
-    "author": "airyland",
-    "maintainers": [
-        "李政 <i@mao.li>"
+  "family": "moe",
+  "name": "rater",
+  "version": "1.1.2",
+  "description": "星星评分实现",
+  "homepage": "https://github.com/airyland/rater",
+  "author": "airyland",
+  "maintainers": [
+    "李政 <i@mao.li>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/airyland/rater.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "main": "index.js",
+    "output": [
+      "rater.js",
+      "rater.css",
+      "star.gif",
+      "star.png",
+      "moekit-rater.png"
     ],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/airyland/rater.git"
+    "alias": {},
+    "devAlias": {},
+    "engines": {},
+    "devDependencies": {
+      "seajs": "2.2.1"
     },
-    "bugs": {
-        "url": ""
-    },
-    "keywords": [],
-    "licenses": "MIT",
-    "spm": {
-        "output": ["rater.js", "rater.css", "star.gif", "star.png", "moekit-rater.png"],
-        "alias": {},
-        "devAlias": {},
-        "engines": {}
+    "dependencies": {
+      "jquery": "1.8.3",
+      "events": "1.2.0"
     }
+  }
 }

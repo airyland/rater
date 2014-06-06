@@ -1,12 +1,8 @@
-define(function(require) {
+var rater = require('rater');
 
-  var rater = require('rater');
-
-  describe('rater', function() {
+describe('rater', function() {
 
     it('normal usage', function() {
 
     });
-  });
-
 });
