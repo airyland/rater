@@ -37,7 +37,7 @@
     overflow:hidden;
     width:100%;
     height:20px;
-    background:url(moekit-rater.png) repeat-x 0 -33px;
+    background:url(./moekit-rater.png) repeat-x 0 -33px;
     float:left;
 }
 .moekit-star-front {
@@ -47,7 +47,7 @@
 
 
 .rater-item {
-    background: url(moerater.png) no-repeat;
+    background: url(./moerater.png) no-repeat;
 }
 
 .rater-normal {

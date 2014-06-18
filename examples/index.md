@@ -10,31 +10,22 @@
     <label>经过</label><input class="hover" type="text" />
     <label>离开</label><input class="leave" type="text" />
 </div>
-
 ````
 ````javascript
-seajs.use('index', function(rater){
-new rater({
-    target:'.moekit-star-1',
-    min:1,
-    max:5,
-    //enabled:false,
-    onselect : function(number,$this) {
-    console.log('on select',arguments)
-      $this.closest('.moekit-star').find('input.select').val(number);
-    },
-     onhover : function(number,$this) {
-        console.log('on hover',arguments)
-          $this.closest('.moekit-star').find('input.hover').val(number);
-     },
-     onleave : function(number,hoverNumber,$this) {
-            console.log('on leave',arguments)
-             $this.closest('.moekit-star').find('input.leave').val(number+' '+hoverNumber);
-     }
-
+seajs.use('index', function(rater) {
+    new rater({
+        target: '.moekit-star-1',
+        min: 1,
+        max: 5,
+        half: true,
+        step:2
+    }).on('select', function(number, $this) {
+        $this.closest('.moekit-star').find('input.select').val(number);
+    }).on('leave', function(number, hoverNumber, $this) {
+        $this.closest('.moekit-star').find('input.leave').val(number + ' ' + hoverNumber);
+    }).on('hover', function(number, $this) {
+        $this.closest('.moekit-star').find('input.hover').val(number);
     });
-
-
 });
 ````
 
@@ -61,12 +52,16 @@ new rater({
 <div class="moekit-star-5"></div>
 ````
 ````javascript
-seajs.use('index', function(rater){
+seajs.use(['index','jquery'], function(rater,$){
+
+$('.moekit-star-5').each(function(index,one){
 new rater({
-    target:'.moekit-star-5',
+    target:$(one),
     enabled:true,
     value:2
 });
+});
+
 });
 ````
 

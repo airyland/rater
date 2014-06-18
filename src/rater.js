@@ -5,10 +5,10 @@
  * 4. single star width
  */
 var $ = require('jquery');
-var Events = require('events');
+var Events = require('eventor');
 window.__rater_uid = 0;
 
-require('./rater.css');
+require.async('./rater.css');
 var html = '<div class="moekit-star-box"><span class="moekit-star-bg"><em class="moekit-star-front"></em></span></div>';
 
 function rater(options) {
@@ -23,7 +23,8 @@ function rater(options) {
         onselect: null, // when selected
         onhover: null, // when hover
         onleave: null, // when leave
-        half: false // if can select half star
+        half: false, // if can select half star
+        step: 1 // can be 1 or 2
     };
 
     $.extend(settings, options);
@@ -31,7 +32,7 @@ function rater(options) {
     this.o = settings;
 
     _this.$targets = $(this.o.target);
-    _this.$targets.each(function(index, target) {
+    _this.$targets.each(function (index, target) {
         _this._render(target);
         _this._bind(target);
     });
@@ -42,7 +43,7 @@ function rater(options) {
 // mixin
 Events.mixTo(rater);
 
-rater.prototype._render = function(target) {
+rater.prototype._render = function (target) {
     window.__rater_uid++;
     var settings = this.o;
     var $this = $(target);
@@ -58,7 +59,7 @@ rater.prototype._render = function(target) {
         this.setNumber(settings.min);
     }
     if (settings.value && settings.value > settings.min) {
-        this.setNumber(settings.value);
+        this.setNumber(settings.value / this.o.step);
     }
 
     if ($this.is('input')) {
@@ -68,7 +69,7 @@ rater.prototype._render = function(target) {
     }
 };
 
-rater.prototype._bind = function(target) {
+rater.prototype._bind = function (target) {
     var $this = $(target);
     var $box = this.$box;
     var $star = this.$star;
@@ -76,7 +77,7 @@ rater.prototype._bind = function(target) {
     var _this = this;
     if (settings.readonly === false) {
         var render = false;
-        $box.mousemove(function(e) {
+        $box.mousemove(function (e) {
             if (!render && settings.value) {
                 _this.number = settings.value;
                 render = true;
@@ -100,25 +101,22 @@ rater.prototype._bind = function(target) {
                 _this.setNumber(hoverNumber, false);
             }
             // hover callback
-            settings.onhover && settings.onhover.call($(this), _this.hoverNumber, $this);
-            _this.trigger('hover', _this.hoverNumber, $this);
+            _this.trigger('hover', _this.hoverNumber * _this.o.step, $this);
         }).
-        click(function() {
-            _this.number = _this.hoverNumber;
-            if (settings.min && _this.number < settings.min) {
-                _this.number = settings.min;
-            }
-            _this.setNumber(_this.number);
-            // select callback
-            settings.onselect && settings.onselect.call($(this), _this.number, $this);
-            _this.trigger('select', _this.number, $this);
-        }).
-        mouseleave(function() {
-            _this.setNumber(_this.number);
-            // leave callback
-            settings.onleave && settings.onleave.call($(this), _this.number, _this.hoverNumber, $this);
-            _this.trigger('leave', _this.number, _this.hoverNumber, $this);
-        });
+            click(function () {
+                _this.number = _this.hoverNumber;
+                if (settings.min && _this.number < settings.min) {
+                    _this.number = settings.min;
+                }
+                _this.setNumber(_this.number);
+                // select callback
+                _this.trigger('select', _this.number * _this.o.step, $this);
+            }).
+            mouseleave(function () {
+                _this.setNumber(_this.number);
+                // leave callback
+                _this.trigger('leave', _this.number * _this.o.step, _this.hoverNumber * _this.o.step, $this);
+            });
     } else { // disabled
         $box.addClass('moekit-star-box-disabled');
     }
@@ -126,19 +124,19 @@ rater.prototype._bind = function(target) {
     _this.trigger('init');
 
     // input value change handler 
-    _this.on('select', function(number, $target) {
+    _this.on('select', function (number, $target) {
         if ($target.is('input')) {
-            $target.val(number);
+            $target.val(number * _this.o.step);
         }
     });
 
 };
 
-rater.prototype.reset = function() {
+rater.prototype.reset = function () {
     return this;
 };
 
-rater.prototype.setNumber = function(number, isSet) {
+rater.prototype.setNumber = function (number, isSet) {
     if (isSet === true) {
         this.number = number;
     }
@@ -149,15 +147,15 @@ rater.prototype.setNumber = function(number, isSet) {
     return this;
 };
 
-rater.prototype.getNumber = function() {
+rater.prototype.getNumber = function () {
     return this.number;
 };
 
-rater.prototype._bindClick = function() {
+rater.prototype._bindClick = function () {
 
 };
 
-rater.prototype.destroy = function() {
+rater.prototype.destroy = function () {
     return this;
 };
 

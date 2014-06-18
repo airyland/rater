@@ -19,3 +19,22 @@ new rater({
 });
 });
 ````
+
+
+````html
+<div class="moekit-star-5"></div>
+````
+
+````javascript
+seajs.use('index', function(rater){
+new rater({
+    enabled: false,
+    target:'.moekit-star-5',
+    min:3,
+    max:20,
+    value:4.3,
+    readonly:true
+});
+});
+````
+
