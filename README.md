@@ -41,11 +41,11 @@
 ### value <em>Number</em>
 默认显示的星数
 
-### onselect <em>function(number,target)</em>
+### on('select' <em>function(number,target)</em>)
 选择星星时的回调,`this`指向`target`，参数为当前选择到的值
 
-### onhover <em>function(hoverNumber,target)</em>
+### on('hover' <em>function(hoverNumber,target)</em>)
 经过星星时的回调,`this`指向`target`，参数为当前经过的星星值(星星值由左到右从1开始)
 
-### onleave <em>function(number,hoverNumber,target)</em>
+### on('leave' <em>function(number,hoverNumber,target)</em>)
 离开整个评分区域的回调,`this`指向`target`，参数1为当前选择的星星值，参数2为当前经过到的值
