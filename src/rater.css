@@ -23,28 +23,29 @@
     cursor: pointer
 }
 
-.moekit-star-box{
-    overflow:hidden;
-    cursor:pointer;
+.moekit-star-box {
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .moekit-star-box-disabled {
-    cursor:text;
+    cursor: text;
 }
 
-.moekit-star-bg,.moekit-star-front {
-    display:block;
-    overflow:hidden;
-    width:100%;
-    height:20px;
-    background:url(./moekit-rater.png) repeat-x 0 -33px;
-    float:left;
+.moekit-star-bg, .moekit-star-front {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+    background: url(./moekit-rater.png) repeat-x 0 -33px;
+    float: left;
 }
+
 .moekit-star-front {
-    float:none;
-    background-position:0 -55px;
+    float: none;
+    background-position: 0 -55px;
+    -webkit-transition: all 0.1s linear;
 }
-
 
 .rater-item {
     background: url(./moerater.png) no-repeat;
