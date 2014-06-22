@@ -39,8 +39,9 @@ $('.moekit-star-6').each(function(index,target){
     max:20,
     value:$(target).val(),
     half:true
-}).on('all',function(event,a,b){
-    console.log(event,a,b);
+}).on('select',function(value,$box,$target){
+   // console.log(event,a,b);
+    console.log(value,$target.val());
 })
 });
 });

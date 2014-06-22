@@ -70,7 +70,7 @@ rater.prototype._render = function (target) {
 };
 
 rater.prototype._bind = function (target) {
-    var $this = $(target);
+    var $this = this.$target = $(target);
     var $box = this.$box;
     var $star = this.$star;
     var settings = this.o;
@@ -108,7 +108,7 @@ rater.prototype._bind = function (target) {
                 if (settings.min && _this.number < settings.min) {
                     _this.number = settings.min;
                 }
-                _this.setNumber(_this.number, true);
+                _this.setNumber(_this.number);
             }).
             mouseleave(function () {
                 _this.setNumber(_this.number, false);
@@ -122,9 +122,9 @@ rater.prototype._bind = function (target) {
     _this.trigger('init');
 
     // input value change handler 
-    _this.on('select', function (number, $target) {
+    _this.on('select', function (value, $box, $target) {
         if ($target.is('input')) {
-            $target.val(number * _this.o.step);
+            $target.val(value);
         }
     });
 
@@ -138,7 +138,7 @@ rater.prototype.setNumber = function (number, isSet) {
     if (typeof isSet === 'undefined' || isSet === true) {
         this.number = number;
         // select callback
-        this.trigger('select', this.number * this.o.step, this.$box);
+        this.trigger('select', this.number * this.o.step, this.$box, this.$target);
     }
 
     this.$star.css({
