@@ -56,10 +56,10 @@ rater.prototype._render = function (target) {
     });
     // min star
     if (settings.min) {
-        this.setNumber(settings.min);
+        this.setNumber(settings.min, false);
     }
     if (settings.value && settings.value > settings.min) {
-        this.setNumber(settings.value / this.o.step);
+        this.setNumber(settings.value / this.o.step, false);
     }
 
     if ($this.is('input')) {
@@ -108,12 +108,10 @@ rater.prototype._bind = function (target) {
                 if (settings.min && _this.number < settings.min) {
                     _this.number = settings.min;
                 }
-                _this.setNumber(_this.number);
-                // select callback
-                _this.trigger('select', _this.number * _this.o.step, $this);
+                _this.setNumber(_this.number, true);
             }).
             mouseleave(function () {
-                _this.setNumber(_this.number);
+                _this.setNumber(_this.number, false);
                 // leave callback
                 _this.trigger('leave', _this.number * _this.o.step, _this.hoverNumber * _this.o.step, $this);
             });
@@ -137,14 +135,20 @@ rater.prototype.reset = function () {
 };
 
 rater.prototype.setNumber = function (number, isSet) {
-    if (isSet === true) {
+    if (typeof isSet === 'undefined' || isSet === true) {
         this.number = number;
+        // select callback
+        this.trigger('select', this.number * this.o.step, this.$box);
     }
 
     this.$star.css({
         width: this.o.width * number
     });
     return this;
+};
+
+rater.prototype.setValue = function (value) {
+    this.setNumber(value / this.o.step);
 };
 
 rater.prototype.getNumber = function () {
