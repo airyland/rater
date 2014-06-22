@@ -49,7 +49,7 @@ rater.prototype._render = function (target) {
     var $this = $(target);
     // set rater width
     this.$box = $(html).css({
-        width: settings.width * settings.max / this.o.step
+        width: settings.width * settings.max
     }) //.addClass('rater-target-' + window.__rater_uid);
     this.$star = this.$box.find('.moekit-star-front').css({
         width: settings.width * settings.value / this.o.step
