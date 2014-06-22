@@ -16,7 +16,8 @@ var rater = new Rater({
     min:1.5,
     max:20,
     value:4,
-    half:true
+    half:true,
+    step:2
 }).on('all',function(event,a,b){
     console.log(event,a,b);
 });
