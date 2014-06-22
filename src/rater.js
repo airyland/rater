@@ -49,16 +49,16 @@ rater.prototype._render = function (target) {
     var $this = $(target);
     // set rater width
     this.$box = $(html).css({
-        width: settings.width * settings.max
+        width: settings.width * settings.max / this.o.step
     }) //.addClass('rater-target-' + window.__rater_uid);
     this.$star = this.$box.find('.moekit-star-front').css({
-        width: settings.width * settings.value
+        width: settings.width * settings.value / this.o.step
     });
     // min star
     if (settings.min) {
-        this.setNumber(settings.min, false);
+        this.setNumber(settings.min / this.o.step, false);
     }
-    if (settings.value && settings.value > settings.min) {
+    if (settings.value && settings.value / this.o.step > settings.min) {
         this.setNumber(settings.value / this.o.step, false);
     }
 
@@ -79,7 +79,7 @@ rater.prototype._bind = function (target) {
         var render = false;
         $box.mousemove(function (e) {
             if (!render && settings.value) {
-                _this.number = settings.value;
+                _this.number = settings.value / _this.o.step;
                 render = true;
             } else {
                 _this.number = _this.number || 0;
