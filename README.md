@@ -1,25 +1,15 @@
 # rater
 
 ---
-
- [![Build Status](https://secure.travis-ci.org/airyland/rater.png)](https://travis-ci.org/airyland/rater)
- [![Coverage Status](https://coveralls.io/repos/airyland/rater/badge.png?branch=master)](https://coveralls.io/r/airyland/rater)
+ [![moekit version](http://moekit.com/badge/rater)](http://moekit.com/package/rater)
+ [![Build Status](https://img.shields.io/travis/airyland/rater.svg)](https://travis-ci.org/airyland/rater)
+ [![Coverage Status](https://img.shields.io/coveralls/airyland/rater.svg)](https://coveralls.io/r/airyland/rater)
 
 
 ---
 
-## 需求来源
-商业需求的试用报告需要星级评分
-
-`Discuz`特定版块发帖中使用需要去修改版块的自定义信息的显示模块。
-
-比较麻烦，请咨询`李政`或者`阿钢`。
 
 ## 使用说明
-
-支持`PC站`的jQuery和`WAP站`的Zepto。
-
-## API
 
 完善中。请先看演示。
 
